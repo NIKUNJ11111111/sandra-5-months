@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Months of Us</title>
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Caveat:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* main color palette used everywhere */
+:root{
+  --bg: #FBF3EE;
+  --card: #FFFDFB;
+  --blush: #F6E2E1;
+  --ink: #4A3438;
+  --ink2: #8A6E70;
+  --rose: #E19A96;
+  --lavender: #B9A6D9;
+  --butter: #EFC15E;
+  --sage: #9CB98C;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--rose);
+  color: white;
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+.script {
+  font-family: 'Caveat', cursive;
+}
+
+a {
+  color: inherit;
+}
+
+/* the blurry circles floating in the background */
+.bg-shape {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* hero section - the big intro at the top */
+
+.hero{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8vh 6vw;
+  z-index: 1;
+}
+
+.hero .eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--rose);
+  margin-bottom: .6rem;
+  transform: rotate(-2deg);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--rose);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero .underline {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: .02em;
+  height: .28em;
+  z-index: -1;
+}
+
+.hero .sub {
+  margin-top: 1.4rem;
+  color: var(--ink2);
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  max-width: 32ch;
+}
+
+.hero .from {
+  margin-top: 2.2rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: var(--ink);
+  opacity: .75;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 6vh;
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.scroll-cue .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rose);
+  animation: bob 1.8s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: .4; }
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  padding: 9vh 6vw;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#musicBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 60;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--card);
+  box-shadow: 0 6px 16px -8px rgba(74,52,56,.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+/* the "two weirdos" cards section */
+
+.weirdos h2 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  text-align: center;
+  max-width: 16ch;
+  margin: 0 auto 3rem;
+}
+
+.weirdos h2 span {
+  color: var(--rose);
+}
+
+.weirdo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .weirdo-grid { grid-template-columns: 1fr; }
+}
+
+.weirdo-card {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 1.8rem 1.6rem;
+  box-shadow: 0 10px 30px -18px rgba(74,52,56,.35);
+  position: relative;
+  transform: rotate(var(--r, 0deg));
+  transition: transform .25s ease;
+}
+
+/* giving each card a slightly different tilt so it looks less
+   like a perfect grid, more like stuff taped to a wall */
+.weirdo-card:nth-child(1) { --r: -1.5deg; }
+.weirdo-card:nth-child(2) { --r: 1.2deg; }
+.weirdo-card:nth-child(3) { --r: 1deg; }
+.weirdo-card:nth-child(4) { --r: -1deg; }
+
+.weirdo-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.weirdo-card .tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 60px;
+  height: 22px;
+  background: var(--butter);
+  opacity: .7;
+  transform: translateX(-50%) rotate(-3deg);
+  border-radius: 2px;
+}
+
+.weirdo-card p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.weirdo-card p::before {
+  content: "✦";
+  color: var(--rose);
+  margin-right: .5rem;
+}
+
+/* dashed border = "hey, you still need to fill this in" */
+[data-editable="true"] {
+  border: 1.5px dashed var(--ink2);
+  border-radius: 10px;
+  padding: 2px 6px;
+  opacity: .85;
+}
+
+
+/* month by month timeline */
+
+.timeline h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  margin-bottom: .6rem;
+}
+
+.timeline .sub {
+  text-align: center;
+  color: var(--ink2);
+  margin-bottom: 3.5rem;
+}
+
+.tl-track {
+  position: relative;
+  padding-left: 2.4rem;
+}
+
+/* the dotted vertical line behind the timeline numbers */
+.tl-track::before {
+  content: "";
+  position: absolute;
+  left: .85rem;
+  top: .5rem;
+  bottom: .5rem;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--rose) 0 6px, transparent 6px 12px);
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 2.6rem;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-num {
+  position: absolute;
+  left: -2.4rem;
+  top: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--rose);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: .85rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 5px var(--bg);
+}
+
+.tl-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 8px 24px -16px rgba(74,52,56,.3);
+}
+
+.tl-card h3 {
+  font-size: 1.15rem;
+  color: var(--rose);
+  margin-bottom: .35rem;
+}
+
+.tl-card p {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+
+.album h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+.album .sub {
+  text-align: center;
+  color: var(--ink2);
+  margin-bottom: 2.5rem;
+}
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.4rem;
+}
+
+/* folder card */
+.folder-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 1.6rem 1rem 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 26px -16px rgba(74,52,56,.35);
+  transition: transform .2s ease;
+}
+.folder-card:hover { transform: translateY(-4px); }
+.folder-card .folder-icon-wrap {
+  position: relative;
+  width: 64px;
+  height: 50px;
+  margin: 0 auto .8rem;
+}
+.folder-card .folder-tab {
+  position: absolute;
+  top: 0; left: 6px;
+  width: 28px; height: 10px;
+  background: var(--butter);
+  border-radius: 4px 4px 0 0;
+}
+.folder-card .folder-body {
+  position: absolute;
+  top: 6px; left: 0;
+  width: 64px; height: 44px;
+  background: var(--rose);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.folder-card .folder-name {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+.folder-card .folder-count {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--ink2);
+}
+
+/* folder view - opens full screen when a folder is tapped */
+.folder-view {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 90;
+  overflow-y: auto;
+  padding: 20px;
+}
+.folder-view.show { display: block; }
+.folder-view-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px 20px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  z-index: 2;
+}
+#folderCloseBtn {
+  border: none;
+  background: var(--card);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -8px rgba(74,52,56,.4);
+}
+.folder-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+.folder-empty {
+  text-align: center;
+  color: var(--ink2);
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  padding: 3rem 0;
+}
+
+.album-item {
+  position: relative;
+  cursor: pointer;
+}
+.album-item img,
+.album-item video {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  transition: transform .2s ease;
+}
+.album-item:hover img,
+.album-item:hover video { transform: scale(1.05); }
+
+.play-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px; height: 34px;
+  background: rgba(0,0,0,.55);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox.show { display: flex; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+}
+.lightbox video {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+}
+
+
+/* polaroid photo gallery */
+
+.gallery h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  margin-bottom: 3rem;
+}
+
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.6rem;
+}
+
+.polaroid {
+  background: white;
+  padding: 10px 10px 34px;
+  border-radius: 4px;
+  box-shadow: 0 10px 24px -14px rgba(74,52,56,.4);
+  transform: rotate(var(--r, 0deg));
+  transition: transform .2s ease;
+}
+
+.polaroid:nth-child(odd) { --r: -2deg; }
+.polaroid:nth-child(even) { --r: 2deg; }
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.polaroid .frame {
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--blush), var(--white));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.polaroid .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: soft;
+  transition: opacity 1s ease;
+  image-rendering: 1s;
+}
+
+.polaroid .cap {
+  display: block;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  margin-top: 8px;
+  color: var(--ink2);
+}
+
+
+
+/* the envelope you open at the end */
+
+.finale {
+  text-align: center;
+  padding-bottom: 14vh;
+}
+
+.finale .lead {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--ink2);
+  margin-bottom: 2.2rem;
+}
+
+.envelope-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.envelope {
+  position: relative;
+  width: min(320px, 80vw);
+  aspect-ratio: 3 / 2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.env-body {
+  position: absolute;
+  inset: 0;
+  background: var(--rose);
+  border-radius: 10px;
+  box-shadow: 0 20px 40px -20px rgba(74,52,56,.5);
+  overflow: hidden;
+}
+
+.env-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: #d98884;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform .6s cubic-bezier(.6, 0, .4, 1);
+  z-index: 3;
+}
+
+.env-shade-l, .env-shade-r {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 70%;
+  background: #dd908c;
+}
+
+.env-shade-l { left: 0; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.env-shade-r { right: 0; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+
+.seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  background: var(--butter);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  z-index: 4;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.letter {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 5%;
+  height: 92%;
+  background: #fffdf8;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.15);
+  transform: translateY(110%);
+  transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.letter h3 {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(0.8rem, 3vw, 1.2rem);
+  color: var(--rose);
+  line-height: 1.3;
+}
+
+/* this is the part that actually does the "opening" animation -
+   toggling .open on .envelope flips the flap, slides the letter up,
+   and fades the wax seal out */
+.envelope.open .env-flap { transform: rotateX(180deg); }
+.envelope.open .seal { opacity: 0%; transform: translate(-50%, -50%) scale(.4); }
+.envelope.open .letter { transform: translateY(0%); }
+
+.hint {
+  margin-top: 1.6rem;
+  color: var(ink2);
+  font-size: .95rem;
+}
+
+footer {
+  text-align: center;
+  padding: 4vh 6vw 6vh;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--ink2);
+  position: relative;
+  z-index: 1;
+}
+
+.heart-fx {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.heart-piece {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* turn off the fun stuff for people who have motion sensitivity */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-cue .dot { animation: none; }
+  .weirdo-card, .polaroid, .env-flap, .letter, .seal { transition: none !important; }
+  .heart-piece { animation: none !important; display: none; }
+}
+
+</style>
+</head>
+<body>
+<audio id="bgMusic" src="song.mp3" loop></audio>
+
+<button id="musicBtn" aria-label="toggle music">🔈</button>
+
+<div id="bgShapes"></div>
+
+<!-- hero -->
+<section class="hero">
+  <div class="eyebrow">for miss Sandra</div>
+  <h1>
+    Five months of being
+    <span style="position:relative; display:inline-block;">
+      <em>two weirdos</em>
+      <svg class="underline" viewBox="0 0 300 20" preserveAspectRatio="none">
+        <path d="M2 14 Q 75 4, 150 12 T 298 10" fill="none" stroke="#EFC15E" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </span>
+    in love
+  </h1>
+  <p class="sub" id="heroSub">and honestly? that's the best part.</p>
+  <div class="from">— Nikk</div>
+  <div class="scroll-cue"><span>scroll</span><span class="dot"></span></div>
+</section>
+
+<!-- why we're weirdos -->
+<section class="weirdos">
+  <h2>Two <span>certified weirdos,</span> one very good pair</h2>
+  <div class="weirdo-grid" id="weirdoGrid"></div>
+</section>
+
+<!-- timeline -->
+<section class="timeline">
+  <h2>5 months, month by month</h2>
+  <p class="sub">a little map of us so far</p>
+  <div class="tl-track" id="tlTrack"></div>
+</section>
+
+
+
+<div class="lightbox" id="lightbox"></div>
+
+<!-- gallery -->
+<section class="gallery">
+  <h2>Some pictures of her i like : </h2>
+  <div class="polaroid-grid" id="polaroidGrid"></div>
+</section>
+
+<!-- video call memories album -->
+<section class="album">
+  <h2>Our video call memories 📞💕</h2>
+  <p class="sub">tap a folder to open it</p>
+  <div class="album-grid" id="albumGrid"></div>
+</section>
+
+<div class="folder-view" id="folderView">
+  <div class="folder-view-header">
+    <span id="folderViewTitle"></span>
+    <button id="folderCloseBtn" aria-label="close folder">✕</button>
+  </div>
+  <div class="folder-items" id="folderItems"></div>
+</div>
+
+<!-- envelope finale -->
+<section class="finale">
+  <p class="lead">one more thing before you go...</p>
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope">
+      <div class="env-body">
+        <div class="letter" id="letter">
+          <h3 id="letterMsg"></h3>
+        </div>
+        <div class="env-shade-l"></div>
+        <div class="env-shade-r"></div>
+        <div class="env-flap"></div>
+      </div>
+      <div class="seal" id="seal">💌</div>
+    </div>
+  </div>
+  <p class="hint">tap the envelope to open — tap again to close</p>
+</section>
+
+<footer id="footerNote"></footer>
+
+<div class="heart-fx" id="heartFx"></div>
+
+<script>
+
+// this is where all the actual content lives.
+// just edit the text inside the quotes below, don't touch the rest.
+const content = {
+  heroSubtitle: "and honestly? that's the best part.",
+
+  weirdoNotes: [
+    "We laugh at things literally no one else finds funny.",
+    "being weirdo with you is the best part with you.",
+    "our weirdness is makes more strong our relationship.",
+    "we never serious whatever in situation we are."
+  ],
+
+  timeline: [
+    { title: "Month 1", text: "it was velentine time that was best velentine in my life." },
+    { title: "Month 2", text: "we started call eachother and talk gosipp and share everything what happened." },
+    { title: "Month 3", text: "start to being weird and comfortable with each eachother." },
+    { title: "Month 4", text: "start to dream about future and make it true amd try to understand more." },
+    { title: "Month 5", text: "and its already 5 months completed so fast time going." }
+  ],
+
+  // leave this empty for now, placeholders will show up instead.
+  // once you have real photos add them like:
+  // { src: "us1.jpg", caption: "that one weird selfie" }
+photos: [
+  { caption: "Little charm", images: ["Baby.jpg", "Baby2.jpg", "Baby3.jpg", "Baby4.jpg", "Baby5.jpg", "Babyq1.jpg"] },
+  { caption: "Cutiee", images: ["Cute.jpg", "Cute2.jpg", "Cute3.jpg", "Cute4.jpg", "Cute5.jpg", "Cute6.jpg"] },
+  { caption: "Magadanga", images: ["Beautiful.jpg", "Beautiful2.jpg", "Beautifulq2.jpg", "Beautifulq.jpg", "Beautifulq3.jpg", "Beautifulq4.jpg"] },
+  { caption: "Hotness", images: ["Hot.jpg", "Hot2.jpg", "Hot3.jpg", "Hot4.jpg", "Hot5.jpg","Hotq1.jpg"] }
+],
+
+  albumFolders: [
+    {
+      name: "Video Call Photos",
+      icon: "📷",
+      items: [
+        { type: "photo", src: "P1.jpg" },
+        { type: "photo", src: "P2.jpg" },
+        { type: "photo", src: "P3.jpg" },
+        { type: "photo", src: "P4.jpg" },
+        { type: "photo", src: "P5.jpg" },
+        { type: "photo", src: "P6.jpg" },
+        { type: "photo", src: "P7.jpg" },
+        { type: "photo", src: "P8.jpg" },
+        { type: "photo", src: "P9.jpg" },
+        { type: "photo", src: "P10.jpg" },
+        { type: "photo", src: "P11.jpg" },
+        { type: "photo", src: "P12.jpg" },
+        { type: "photo", src: "P13.jpg" },
+        { type: "photo", src: "P14.jpg" },
+        { type: "photo", src: "P15.jpg" },
+        { type: "photo", src: "P16.jpg" },
+        { type: "photo", src: "P17.jpg" },
+        { type: "photo", src: "P18.jpg" },
+        { type: "photo", src: "P19.jpg" },
+        { type: "photo", src: "P20.jpg" },
+        { type: "photo", src: "P21.jpg" },
+        { type: "photo", src: "P22.jpg" },
+        { type: "photo", src: "P23.jpg" },
+        { type: "photo", src: "P24.jpg" },
+        { type: "photo", src: "P25.jpg" },
+        { type: "photo", src: "P26.jpg" },
+        { type: "photo", src: "P27.jpg" },
+        { type: "photo", src: "P28.jpg" },
+        { type: "photo", src: "P29.jpg" },
+        { type: "photo", src: "P30.jpg" },
+        { type: "photo", src: "P31.jpg" },
+        { type: "photo", src: "P32.jpg" }
+        // aur photos yaha add karo
+      ]
+    },
+    {
+      name: "Video Call Videos",
+      icon: "🥰",
+      items: [
+        { type: "video", src: "V1.mp4" },
+        { type: "video", src: "V2.mp4" },
+        { type: "video", src: "V3.mp4" },
+        { type: "video", src: "V4.mp4" },
+        { type: "video", src: "V5.mp4" },
+        { type: "video", src: "V6.mp4" },
+        { type: "video", src: "V7.mp4" },
+        { type: "video", src: "V8.mp4" },
+        // aur videos yaha add karo
+      ]
+    }
+    // naya folder banane ke liye, upar jaisa ek aur { name: ..., icon: ..., items: [...] } add kar do
+  ],
+
+  finalMessage: "Hy my lovee! HAPPY MONTHSARRY. We completed 5 months together my babyyy. I can't believe that . I'm soo happy that we spent that time together till now. As we complete 5 months we need to complete whole life together. We laugh we fight we being weird we cry everything with you is best moment with you. I LOVE YOU SOO MUCH MISS MAKWANA. MISSS YOUU SOO MUCHH MY HONEYYYYY. ",
+
+  footerNote: "Your Weirdo Nikk"
+};
+
+// grabbing the empty divs from the html so we can fill them with content
+const weirdoGrid = document.getElementById('weirdoGrid');
+const tlTrack = document.getElementById('tlTrack');
+const polaroidGrid = document.getElementById('polaroidGrid');
+
+// loop through weirdoNotes and turn each one into a little card
+content.weirdoNotes.forEach(function (note) {
+  const isPlaceholder = note.toLowerCase().includes('add your');
+  const card = document.createElement('div');
+  card.className = 'weirdo-card';
+  card.innerHTML = '<div class="tape"></div><p ' + (isPlaceholder ? 'data-editable="true"' : '') + '>' + note + '</p>';
+  weirdoGrid.appendChild(card);
+});
+
+// same idea but for the timeline - one card per month
+content.timeline.forEach(function (item, i) {
+  const isPlaceholder = item.text.toLowerCase().startsWith('add a memory');
+  const el = document.createElement('div');
+  el.className = 'tl-item';
+  el.innerHTML = `
+    <div class="tl-num">${i + 1}</div>
+    <div class="tl-card">
+      <h3>${item.title}</h3>
+      <p ${isPlaceholder ? 'data-editable="true"' : ''}>${item.text}</p>
+    </div>`;
+  tlTrack.appendChild(el);
+});
+
+// build the polaroid gallery. if no real photos were added yet,
+// just fill it with placeholders so it still looks nice
+const placeholderCaps = ['us, probably being weird', 'add a photo here', 'this needs a picture', 'and this one too'];
+const photoSlots = content.photos.length ? content.photos : placeholderCaps.map(c => ({ images: [], caption: c }));
+
+photoSlots.forEach(function (p) {
+  const hasImages = p.images && p.images.length > 0;
+  const div = document.createElement('div');
+  div.className = 'polaroid';
+  div.innerHTML = `
+    <div class="frame${hasImages ? ' has-photo' : ''}">
+      ${hasImages ? '<img class="slide-img" src="' + p.images[0] + '" alt="' + p.caption + '">' : '📷'}
+    </div>
+    <span class="cap">${p.caption}</span>`;
+  polaroidGrid.appendChild(div);
+
+  // if this frame has more than one photo, cycle through them
+  if (hasImages && p.images.length > 1) {
+    let i = 0;
+    const img = div.querySelector('.slide-img');
+    setInterval(function () {
+      i = (i + 1) % p.images.length;
+      img.style.opacity = 0;
+      setTimeout(function () {
+        img.src = p.images[i];
+        img.style.opacity = 1;
+      }, 300);
+    }, 2000);
+  }
+});
+
+// fill in the plain text bits (subtitle, letter, footer)
+document.getElementById('heroSub').textContent = content.heroSubtitle;
+document.getElementById('letterMsg').textContent = content.finalMessage;
+document.getElementById('footerNote').textContent = content.footerNote;
+
+// handles opening and closing the envelope on click
+const envelope = document.getElementById('envelope');
+const heartFx = document.getElementById('heartFx');
+let opened = false;
+
+envelope.addEventListener('click', function () {
+  opened = !opened;
+  envelope.classList.toggle('open', opened);
+  if (opened) launchHearts();
+});
+
+function launchHearts() {
+  // skip the confetti if the user has reduced motion turned on
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const emojis = ['💕', '💛', '✨', '💗'];
+
+  for (let i = 0; i < 28; i++) {
+    setTimeout(function () {
+      const span = document.createElement('span');
+      span.className = 'heart-piece';
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+      span.style.fontSize = (0.9 + Math.random() * 1.1) + 'rem';
+      heartFx.appendChild(span);
+      setTimeout(function () { span.remove(); }, 5000);
+    }, i * 60);
+  }
+}
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+let musicPlaying = false;
+
+musicBtn.addEventListener('click', function () {
+  if (musicPlaying) {
+    bgMusic.pause();
+    musicBtn.textContent = '🔈';
+  } else {
+    bgMusic.volume = 0.2; // soft, not blasting
+    bgMusic.play();
+    musicBtn.textContent = '🔊';
+  }
+  musicPlaying = !musicPlaying;
+});
+
+const albumGrid = document.getElementById('albumGrid');
+const folderView = document.getElementById('folderView');
+const folderViewTitle = document.getElementById('folderViewTitle');
+const folderItems = document.getElementById('folderItems');
+const folderCloseBtn = document.getElementById('folderCloseBtn');
+const lightbox = document.getElementById('lightbox');
+
+// make a folder card for each album folder
+content.albumFolders.forEach(function (folder) {
+  const card = document.createElement('div');
+  card.className = 'folder-card';
+  card.innerHTML = `
+    <div class="folder-icon-wrap">
+      <div class="folder-tab"></div>
+      <div class="folder-body">${folder.icon || '📁'}</div>
+    </div>
+    <span class="folder-name">${folder.name}</span>
+    <span class="folder-count">${folder.items.length} ${folder.items.length === 1 ? 'item' : 'items'}</span>`;
+
+  card.addEventListener('click', function () {
+    openFolder(folder);
+  });
+
+  albumGrid.appendChild(card);
+});
+
+// when a folder is clicked, open it full screen and show what's inside
+function openFolder(folder) {
+  folderViewTitle.textContent = folder.name;
+  folderItems.innerHTML = '';
+
+  if (folder.items.length === 0) {
+    folderItems.innerHTML = '<div class="folder-empty">nothing here yet 🤍</div>';
+  } else {
+    folder.items.forEach(function (item) {
+      const wrap = document.createElement('div');
+      wrap.className = 'album-item';
+
+      if (item.type === 'video') {
+        wrap.innerHTML = `<video src="${item.src}" muted></video><span class="play-icon">▶</span>`;
+      } else {
+        wrap.innerHTML = `<img src="${item.src}" alt="">`;
+      }
+
+      wrap.addEventListener('click', function () {
+        openLightbox(item);
+      });
+
+      folderItems.appendChild(wrap);
+    });
+  }
+
+  folderView.classList.add('show');
+}
+
+folderCloseBtn.addEventListener('click', function () {
+  folderView.classList.remove('show');
+});
+
+function openLightbox(item) {
+  lightbox.innerHTML = '';
+  let el;
+  if (item.type === 'video') {
+    el = document.createElement('video');
+    el.src = item.src;
+    el.controls = true;
+    el.autoplay = true;
+  } else {
+    el = document.createElement('img');
+    el.src = item.src;
+  }
+  lightbox.appendChild(el);
+  lightbox.classList.add('show');
+}
+
+lightbox.addEventListener('click', function (e) {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('show');
+    lightbox.innerHTML = '';
+  }
+});
+
+// throw a few blurry circles in the background so it's not flat
+const bgShapes = document.getElementById('bgShapes');
+const shapeColors = ['#F6E2E1', '#E7DEF2', '#FBEBC2'];
+
+for (let i = 0; i < 5; i++) {
+  const s = document.createElement('div');
+  s.className = 'bg-shape';
+  const size = 120 + Math.random() * 180;
+  s.style.width = size + 'px';
+  s.style.height = size + 'px';
+  s.style.background = shapeColors[i % shapeColors.length];
+  s.style.top = Math.random() * 100 + 'vh';
+  s.style.left = Math.random() * 100 + 'vw';
+  bgShapes.appendChild(s);
+}
+
+</script>
+</body>
+</html>
